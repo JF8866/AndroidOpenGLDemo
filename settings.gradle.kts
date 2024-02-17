@@ -15,3 +15,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "OpenGLTest"
 include(":app")
+include(":ch2_1")
+include(":ch4_5")
+include(":gl_comm")
