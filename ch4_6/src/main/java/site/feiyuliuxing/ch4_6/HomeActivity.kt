@@ -18,6 +18,7 @@ class HomeActivity : AppCompatActivity() {
                 "6.1 程序构建模型---球体", //4
                 "6.2 OpenGL索引---环面", //5
                 "6.3 加载外部构建的模型", //6
+                "使用FreeType渲染文字", //7
             )
         )
         listView.setOnItemClickListener { adapterView, view, i, l ->

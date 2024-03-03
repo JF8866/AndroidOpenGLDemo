@@ -7,6 +7,7 @@ import site.feiyuliuxing.ch5.RendererTexturedPyramid
 import site.feiyuliuxing.ch6.RendererObjLoaderShuttle
 import site.feiyuliuxing.ch6.RendererSphere
 import site.feiyuliuxing.ch6.RendererTorus
+import site.feiyuliuxing.txt.RendererText
 
 class MyGLSurfaceView(context: Context, rendererIndex: Int) : GLSurfaceView(context) {
     private val renderer: Renderer
@@ -20,6 +21,7 @@ class MyGLSurfaceView(context: Context, rendererIndex: Int) : GLSurfaceView(cont
             4 -> RendererSphere(context) //6.1 程序构建模型---球体
             5 -> RendererTorus(context) //6.2 OpenGL索引---环面
             6 -> RendererObjLoaderShuttle(context) //6.3 加载外部构建的模型
+            7 -> RendererText(context) //使用FreeType渲染文字
             else -> MyGLRenderer(context) //4.6 渲染一个对象的多个副本
         }
         setRenderer(renderer)

@@ -1,6 +1,7 @@
 package site.feiyuliuxing.gl_comm
 
 import android.content.Context
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.opengl.GLES11Ext.GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT
 import android.opengl.GLES11Ext.GL_TEXTURE_MAX_ANISOTROPY_EXT
@@ -79,17 +80,21 @@ object GLUtil {
         }
         return foundError
     }
-    
-    fun Context.loadTexture(@DrawableRes img: Int):Int{
+
+    fun Context.loadTexture(@DrawableRes img: Int): Int {
         val options = BitmapFactory.Options()
         options.inScaled = false
         val bitmap = BitmapFactory.decodeResource(resources, img, options)
-        Log.e(TAG, "bitmap size: ${bitmap.width} x ${bitmap.height}")
+        return loadTexture(bitmap)
+    }
+
+    fun loadTexture(bitmap: Bitmap): Int {
+        Log.d(TAG, "bitmap size: ${bitmap.width} x ${bitmap.height}")
 
         val textures = IntArray(1)
         glGenTextures(1, textures, 0)
         val textureID = textures[0]
-        if(textureID == 0) {
+        if (textureID == 0) {
             Log.e(TAG, "Could not generate a new OpenGL textureId object.")
             return 0
         }
@@ -121,10 +126,10 @@ object GLUtil {
 
         val ext = glGetString(GL_EXTENSIONS)
 //        Log.e(TAG, ext)
-        if(ext.contains("GL_EXT_texture_filter_anisotropic")) {
+        if (ext.contains("GL_EXT_texture_filter_anisotropic")) {
             val anisoset = FloatArray(1)
             glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, anisoset, 0)
-            Log.e(TAG, "anisoset=${anisoset[0]}")
+            Log.d(TAG, "anisoset=${anisoset[0]}")
             glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, anisoset[0])
         }
         bitmap.recycle()
